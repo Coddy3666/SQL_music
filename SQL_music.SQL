@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS album(
 
 CREATE TABLE IF NOT EXISTS artistalbum(
 	artistid integer FOREIGN KEY REFERENCES artist(artistid),
-	albumid integer FOREIGN KEY REFERENCES album(albumid)
+	albumid integer FOREIGN KEY REFERENCES album(albumid),
 	PRIMARY KEY(artistid, albumid)
 );
 
