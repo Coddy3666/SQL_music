@@ -64,3 +64,18 @@ CREATE TABLE IF NOT EXISTS vatracklist (
 
 insert into vatracklist
 values(1,1),(1,2),(2,4),(2,6),(3,2),(3,4),(4,3),(4,5);
+
+select name, duration from track
+where duration =(SELECT max(duration) from track);
+
+select name from track
+where duration > 210;
+
+select name from va
+where releaseyear between  2018 and 2020;
+
+select name from artist
+where name not like '% %';
+
+select name from track
+where name like '%my%' or name like '%мой%';
