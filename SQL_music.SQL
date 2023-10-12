@@ -81,7 +81,7 @@ select name from artist
 where name not like '% %';
 
 select name from track
-where name like '%my%' or name like '%мой%';
+where name iLIKE '%my%' or name iLIKE '%мой%';
 
 --3
 
@@ -109,9 +109,19 @@ join album a on a.id = t.album_id
 group by(a.id)
 ;
 
-SELECT artist.id, artist.name, artistalbum.artist_id, album.releaseyear
-FROM artist
-JOIN artistalbum ON artist.id = artistalbum.artist_id
-JOIN album ON artistalbum.album_id  = album.id
-group by artist.id,artistalbum.artist_id, album.releaseyear
-having album.releaseyear <> 2020;
+SELECT artist.name from artist
+where artist.id not in(
+select artistalbum.artist_id from artistalbum
+join album on artistalbum.album_id = album.id
+where album.releaseyear = 2020
+);
+
+SELECT va.name from va 
+where va.id in(
+select vatracklist.track_id from vatracklist
+join track on vatracklist.track_id = track.id
+join album on track.album_id = album.id
+join artistalbum on album.id = artistalbum.album_id
+join artist on artistalbum.artist_id = artist.id
+where artist.name = 'The Killers'
+);
